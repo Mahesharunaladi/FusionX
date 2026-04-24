@@ -11,9 +11,17 @@ type GlobePoint = {
 
 type SatelliteMapProps = {
   points?: Array<{ id: string; lat: number; lng: number }>;
+  autoRotateSpeed?: number;
+  highlightedPointId?: string;
+  onPointSelect?: (id: string) => void;
 };
 
-export default function SatelliteMap({ points }: SatelliteMapProps) {
+export default function SatelliteMap({
+  points,
+  autoRotateSpeed = 0.45,
+  highlightedPointId,
+  onPointSelect,
+}: SatelliteMapProps) {
   const globeRef = useRef<any>(null);
 
   const globePoints = useMemo<GlobePoint[]>(
@@ -27,22 +35,22 @@ export default function SatelliteMap({ points }: SatelliteMapProps) {
       ]).map((p) => ({
         lat: p.lat,
         lng: p.lng,
-        size: 0.35,
-        color: "#5ca7ff",
+        size: p.id === highlightedPointId ? 0.65 : 0.35,
+        color: p.id === highlightedPointId ? "#9fd0ff" : "#5ca7ff",
         label: p.id,
       })),
-    [points],
+    [points, highlightedPointId],
   );
 
   useEffect(() => {
     if (!globeRef.current) return;
     globeRef.current.pointOfView({ lat: 18, lng: 8, altitude: 2.05 }, 0);
     globeRef.current.controls().autoRotate = true;
-    globeRef.current.controls().autoRotateSpeed = 0.45;
+    globeRef.current.controls().autoRotateSpeed = autoRotateSpeed;
     globeRef.current.controls().enablePan = false;
     globeRef.current.controls().minDistance = 160;
     globeRef.current.controls().maxDistance = 480;
-  }, []);
+  }, [autoRotateSpeed]);
 
   return (
     <div className="map-wrap">
@@ -61,6 +69,11 @@ export default function SatelliteMap({ points }: SatelliteMapProps) {
         pointRadius={0.55}
         pointsMerge
         pointLabel="label"
+        onPointClick={(point) => {
+          if (!onPointSelect) return;
+          const id = (point as { label?: string }).label;
+          if (id) onPointSelect(id);
+        }}
       />
     </div>
   );
