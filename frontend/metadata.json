@@ -1,0 +1,6 @@
+{
+  "name": "TerraSemantic",
+  "description": "Next-generation semantic search engine for satellite imagery using VLMs (Vision-Language Models) for content-driven intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,300;1,400&display=swap');
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --bg: #0A0B0D;
+  --ink: #E4E7EB;
+  --accent: #3B82F6;
+  --panel: #15171D;
+  --border: #232730;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* Custom Leaflet Styles */
+.leaflet-container {
+  background: var(--bg) !important;
+}
+
+.leaflet-tile {
+  filter: brightness(0.6) contrast(1.2) saturate(0.8) hue-rotate(10deg);
+}
+
+.leaflet-control-attribution {
+  background: rgba(10, 11, 13, 0.5) !important;
+  color: #666 !important;
+}
+
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marker-inner {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}

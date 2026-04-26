@@ -9,3 +9,6 @@ tqdm
 faiss-cpu
 torch
 transformers
+python-multipart
+sentencepiece
+protobuf

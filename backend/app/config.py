@@ -8,6 +8,7 @@ class Settings(BaseModel):
     tile_size: int = 224
     data_dir: Path = Path("backend/data")
     faiss_index_path: Path = Path("backend/data/vector.index")
+    faiss_ids_path: Path = Path("backend/data/vector_ids.json")
     metadata_path: Path = Path("backend/data/metadata.jsonl")
     model_name: str = "google/siglip-base-patch16-224"
     device: str = "cpu"
